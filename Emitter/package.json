@@ -1,7 +1,7 @@
 {
-  "name": "syook-encrypt-timeseries",
+  "name": "syook-encrypt-timeseries-emitter",
   "version": "1.0.0",
-  "description": "Encrypt Timeseries",
+  "description": "Encrypt Timeseries  - Emitter Service",
   "main": "index.js",
   "author": "Bijay Rauniyar <rauniyarbijay117@gmail.com>",
   "license": "MIT",
