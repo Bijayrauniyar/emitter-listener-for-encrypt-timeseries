@@ -44,6 +44,7 @@ const createMessageStream = () => {
 
     // encrypt the message
     let encryptedMsg = encrypter.update(message, "utf8", "hex");
+    encryptedMsg += encrypter.final("hex");
     console.log(encryptedMsg, 'encrypt message');
     messageArray.push(encryptedMsg);
   }
@@ -51,6 +52,8 @@ const createMessageStream = () => {
   return messageArray.join("|");
 };
 
-setInterval(() => {
-    console.log(createMessageStream(),'encrypted message stream');
-}, 10000);
+const client = new ws("ws:localhost:3001");
+
+client.on("open", () => {
+  let timerId = setInterval(() => client.send(createMessageStream()), 10000);
+});
