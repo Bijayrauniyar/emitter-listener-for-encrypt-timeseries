@@ -1,0 +1,16 @@
+{
+  "name": "syook-encrypt-timeseries",
+  "version": "1.0.0",
+  "description": "Encrypt Timeseries",
+  "main": "index.js",
+  "author": "Bijay Rauniyar <rauniyarbijay117@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cron": "^1.8.2",
+    "dotenv": "^10.0.0",
+    "ws": "^8.3.0"
+  }
+}
