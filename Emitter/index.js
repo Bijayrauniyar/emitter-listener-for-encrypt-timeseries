@@ -9,12 +9,13 @@ const randomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const sharedSecret = process.env.HMAC_HASH_SECRET;
-function getHmac(message) {
-  const hmac = crypto.createHmac("SHA256", sharedSecret)
-    .update(JSON.stringify(message), "utf-8")
-    .digest("base64");
-  return hmac;
+function getHash(message) {
+  if (message !== undefined) {
+      return crypto.createHash('sha256').update(message).digest('hex');
+  } else {
+      throw new Error('Message is required');
+  }
+
 }
 
 const createMessageStream = () => {
@@ -30,7 +31,7 @@ const createMessageStream = () => {
 
     const sumCheckMessage = {
       ...originalMessage,
-      secret_key: getHmac(originalMessage),
+      secret_key: getHash(JSON.stringify(originalMessage)),
     };
 
     const iv = process.env.INITIALIZATION_VECTOR;
