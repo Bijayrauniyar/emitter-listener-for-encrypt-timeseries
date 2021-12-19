@@ -23,9 +23,7 @@ const validateData = (message) => {
             origin: message.origin,
             destination: message.destination
         }
-        console.log(message, 'message for validate')
         let generatehash = getHash(JSON.stringify(data));
-        
         
         console.log('extracted data from encrypted message', data, '\n');
 
@@ -81,7 +79,7 @@ wsServer.on("connection", (socket) => {
                 incomingData,
                 time
             );
-            console.log(decryptedMsg, 'validate and decrypt incomming message');
+            console.log(decryptData, 'validate and decrypt incomming message');
         } catch (err) {
             console.log(err);
         }
