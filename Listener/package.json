@@ -1,0 +1,17 @@
+{
+  "name": "syook-encrypt-timeseries-listener",
+  "version": "1.0.0",
+  "description": "Encrypt Timeseries  - Listener Service",
+  "main": "index.js",
+  "author": "Bijay Rauniyar <rauniyarbijay117@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.2",
+    "ws": "^8.3.0"
+  }
+}
