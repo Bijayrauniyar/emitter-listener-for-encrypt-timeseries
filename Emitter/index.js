@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-const crypto = require("crypto");
 const ws = require("ws");
 
 const data = require("./data.json");
