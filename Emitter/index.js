@@ -5,23 +5,17 @@ const ws = require("ws");
 
 const data = require("./data.json");
 
+const getHash =  require("./utils/getHash");
+const encryptMessage =  require("./utils/encryptMessage");
+
 const randomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-function getHash(message) {
-  if (message !== undefined) {
-      return crypto.createHash('sha256').update(message).digest('hex');
-  } else {
-      throw new Error('Message is required');
-  }
-
-}
-
 const createMessageStream = () => {
-  const randomNumber = randomInteger(49, 499);
+  const randomNumber = randomInteger(49, 499); // get random integer between 49 - 499
   const messageArray = [];
-  for (var i = 0; i < randomNumber; i++) {
+  for (let i = 0; i < randomNumber; i++) {
     const originalMessage = {
       name: data.names[Math.floor(Math.random() * data.names.length)],
       origin: data.names[Math.floor(Math.random() * data.names.length)],
@@ -30,24 +24,15 @@ const createMessageStream = () => {
 
     const sumCheckMessage = {
       ...originalMessage,
-      secret_key: getHash(JSON.stringify(originalMessage)),
+      secret_key: getHash(JSON.stringify(originalMessage)), // hash orignial message
     };
-
-    const iv = process.env.INITIALIZATION_VECTOR;
-    const key = process.env.ENCRYPT_DECRYPT_KEY;
-
-    const message = JSON.stringify(sumCheckMessage);
-
-    // make the encrypter function
-    const encrypter = crypto.createCipheriv("aes-256-ctr", key, iv);
-
-    // encrypt the message
-    let encryptedMsg = encrypter.update(message, "utf8", "hex");
-    encryptedMsg += encrypter.final("hex");
-    messageArray.push(encryptedMsg);
+     
+    const encryptedMsg = encryptMessage(sumCheckMessage);  // encrypted message data
+   
+    messageArray.push(encryptedMsg);  // push to Array 
   }
     console.log(messageArray, 'encrypted message array');
-  return messageArray.join("|");
+  return messageArray.join("|");  // change , by |
 };
 
 const client = new ws("ws:localhost:3001");
