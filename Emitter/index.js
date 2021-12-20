@@ -27,7 +27,6 @@ const createMessageStream = () => {
       origin: data.names[Math.floor(Math.random() * data.names.length)],
       destination: data.cities[Math.floor(Math.random() * data.cities.length)],
     };
-    console.log(originalMessage, 'origianl message')
 
     const sumCheckMessage = {
       ...originalMessage,
@@ -38,7 +37,6 @@ const createMessageStream = () => {
     const key = process.env.ENCRYPT_DECRYPT_KEY;
 
     const message = JSON.stringify(sumCheckMessage);
-    console.log(message, 'sumCheckMessage');
 
     // make the encrypter function
     const encrypter = crypto.createCipheriv("aes-256-ctr", key, iv);
@@ -46,7 +44,6 @@ const createMessageStream = () => {
     // encrypt the message
     let encryptedMsg = encrypter.update(message, "utf8", "hex");
     encryptedMsg += encrypter.final("hex");
-    console.log(encryptedMsg, 'encrypt message');
     messageArray.push(encryptedMsg);
   }
     console.log(messageArray, 'encrypted message array');
@@ -54,7 +51,4 @@ const createMessageStream = () => {
 };
 
 const client = new ws("ws:localhost:3001");
-
-client.on("open", () => {
-  let timerId = setInterval(() => client.send(createMessageStream()), 10000);
-});
+client.on("open", () => setInterval(() => client.send(createMessageStream()), 10000));

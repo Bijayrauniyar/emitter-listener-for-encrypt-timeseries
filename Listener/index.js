@@ -2,7 +2,12 @@ require("dotenv").config();
 const { WebSocketServer } = require("ws");
 const crypto = require("crypto");
 
+const configureDB = require("./config/db");
+const Message = require("./models/Message");
+
 const wsServer = new WebSocketServer({ port: 3001 });
+
+configureDB();
 
 //function to generate hash
 function getHash(message) {
@@ -24,8 +29,6 @@ const validateData = (message) => {
             destination: message.destination
         }
         let generatehash = getHash(JSON.stringify(data));
-        
-        console.log('extracted data from encrypted message', data, '\n');
 
         if (generatehash !== message.secret_key) {
             throw new Error("Invalid request");
@@ -79,7 +82,29 @@ wsServer.on("connection", (socket) => {
                 incomingData,
                 time
             );
-            console.log(decryptData, 'validate and decrypt incomming message');
+            const parseDecryptData  = decryptData.map(data=>JSON.parse(data));
+
+            console.log(parseDecryptData, 'validate and decrypt incomming message');
+
+            const formateDateTime = `${time.getFullYear()}-${(time.getMonth() + 1)}${time.getDate()} ${time.getHours()}:${time.getMinutes()}`;
+            let savedData;
+
+            const findData = await Message.findOne({ timeStamp: formateDateTime });
+
+            if (!findData) {
+                try {
+                    savedData = await Message.create({ timeStamp: formateDateTime, data: parseDecryptData });
+                } catch (error) {
+                    console.log(error, 'while creating Message data ')
+                }
+            } else {
+                try {
+                    savedData = await Message.findByIdAndUpdate(findData._id, { timeStamp: formateDateTime, data: [...findData.data, parseDecryptData] });
+                } catch (error) {
+                    console.log(error, 'while creating Message data ')
+                }
+            }
+           
         } catch (err) {
             console.log(err);
         }
