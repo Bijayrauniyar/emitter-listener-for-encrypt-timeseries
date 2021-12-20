@@ -31,7 +31,7 @@ const createMessageStream = () => {
    
     messageArray.push(encryptedMsg);  // push to Array 
   }
-    console.log(messageArray, 'encrypted message array');
+    console.log(`${messageArray.length} Data -  encrypted and send`);
   return messageArray.join("|");  // change , by |
 };
 

@@ -9,7 +9,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "cron": "^1.8.2",
     "dotenv": "^10.0.0",
     "ws": "^8.3.0"
   }
