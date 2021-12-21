@@ -41,8 +41,9 @@ wsServer.on("connection", (socket) => {
             if (frontendSocket) {
                 frontendSocket.send(JSON.stringify({
                     successRate: successRate,
-                    time: formatedDateTime,
-                    data: upsertparseDecryptDataRes
+                    time: `${time.getFullYear()}-${(time.getMonth() + 1)}${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`, // send formated date and time
+                    data: parseDecryptData,
+                    NumberOfData:parseDecryptData.length
                 }));
             }
 
