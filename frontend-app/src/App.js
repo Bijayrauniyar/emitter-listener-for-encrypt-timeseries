@@ -41,11 +41,7 @@ export const WebSocketDemo = () => {
           <tbody>
             {messageHistory.current.map((message, index) => (
               <tr
-               style={
-                index % 2 === 0
-                  ? { color: "red", height: "20px" }
-                  : { color: "blue", height: "20px" }
-              }
+               style={{ height: "20px" }}
                 key={index}
               >
                 {console.log(message)}
