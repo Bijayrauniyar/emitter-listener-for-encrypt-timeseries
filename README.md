@@ -63,17 +63,6 @@ Share the github repository and hosted app link with a readme on how to run the 
 
 # Solution
 
-**client.js** - forms and send random number of encrypted message over spefic interval of time
-![image](https://user-images.githubusercontent.com/22377758/128535408-73389842-4402-43fa-bdf5-52decb1604c9.png)
-
-**server.js** - listens the incoming message, decrypt it and forms the batch of data every mintue.
-![image](https://user-images.githubusercontent.com/22377758/128535668-5b2e83d0-6ec2-4df2-a271-86e928bddcd5.png)
-
-**db.js** - inserts the data in time-series optimized collection
-![image](https://user-images.githubusercontent.com/22377758/128535796-56b552c8-6ef4-4a5b-98ea-8b4be01aca05.png)
-
-**util.js** - contains the helper function
-
 ## BackEnd
 
 ### Stack :
