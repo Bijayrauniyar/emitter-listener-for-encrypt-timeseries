@@ -49,18 +49,6 @@ On successful object data integrity validation, add a timestamp to that object a
 
 All the valid data saved should be displayed in a real-time manner on a small frontend app along with the success rate for data transmission and decoding
 
-### How will the assignment be evaluated?
-- Functionality: Is the app functional and performant?
-- Code Quality: Code Readability and structuring.
-- Exception Handling: No crashes and proper error messages logged.
-- Git Commit practices: Manage your code in github and make frequent commits.
-- Bonus consideration will be given if tests are also written.
-- Bonus for Dockerising the apps
-
-### Submission
-Share the github repository and hosted app link with a readme on how to run the code. If you have any other doubts, get in touch with us
-
-
 # Solution
 
 ## BackEnd
